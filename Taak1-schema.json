@@ -3,33 +3,57 @@
   "title": "Taak1_Leidingen",
   "type": "object",
   "additionalProperties": false,
-  "required": ["groepID", "Leidingen"],
+  "required": [
+    "groepID",
+    "Leidingen"
+  ],
   "properties": {
-	"groepID": {
-	  "type": "string",
-	  "pattern": "^groep(?!000$)\\d{3}$",
-	  "description": "groepscode, bijv. groep012 (groep000 is niet toegestaan)"
-	},
+    "groepID": {
+      "type": "string",
+      "pattern": "^groep(?!000$)\\d{3}$",
+      "description": "groepscode, bijv. groep012 (groep000 is niet toegestaan)"
+    },
     "Leidingen": {
       "type": "array",
       "description": "array met elementen (key-value pairs) die elke leiding beschrijven",
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["ID", "DN", "L", "Q_d", "c_d", "h_w_d", "Cw"],
+        "required": [
+          "ID",
+          "DN",
+          "L",
+          "Q_d",
+          "c_d",
+          "h_w_d",
+          "C_w"
+        ],
         "properties": {
-	      "ID": {
-			"type": "string",
-			"minLength": 1,
-			"pattern": "^(?!([Tt][Bb][Dd])$).*\\S.*$",
-			"description": "identificatie van leiding; mag niet leeg, niet alleen spaties en niet 'TBD' zijn"
-		  },
+          "ID": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?!([Tt][Bb][Dd])$).*\\S.*$",
+            "description": "identificatie van leiding; mag niet leeg, niet enkel spaties en niet 'TBD' zijn"
+          },
           "DN": {
             "type": "string",
             "enum": [
-              "DN15", "DN20", "DN25", "DN32", "DN40", "DN50", "DN65",
-              "DN80", "DN100", "DN125", "DN150", "DN200", "DN250",
-              "DN300", "DN350", "DN400"
+              "DN15",
+              "DN20",
+              "DN25",
+              "DN32",
+              "DN40",
+              "DN50",
+              "DN65",
+              "DN80",
+              "DN100",
+              "DN125",
+              "DN150",
+              "DN200",
+              "DN250",
+              "DN300",
+              "DN350",
+              "DN400"
             ],
             "description": "nominale leidingdiameter, bijv. DN80"
           },
@@ -53,10 +77,10 @@
             "exclusiveMinimum": 0,
             "description": "eenheid [m], wrijvingsverlies bij ontwerpdebiet"
           },
-          "Cw": {
+          "C_w": {
             "type": "number",
             "exclusiveMinimum": 0,
-            "description": "eenheid [cm], wrijvingsverliescoefficient zodat h_w = Cw * (Q*(h/m3))^2"
+            "description": "eenheid [m], wrijvingsverliescoefficient zodat h_w = C_w * (Q*(h/m3))^2"
           }
         }
       }
