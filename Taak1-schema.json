@@ -21,6 +21,7 @@
         "additionalProperties": false,
         "required": [
           "ID",
+          "descr",
           "DN",
           "L",
           "Q_d",
@@ -34,6 +35,10 @@
             "minLength": 1,
             "pattern": "^(?!([Tt][Bb][Dd])$).*\\S.*$",
             "description": "identificatie van leiding; mag niet leeg, niet enkel spaties en niet 'TBD' zijn"
+          },
+          "descr": {
+            "type": "string",
+            "description": "optionele beschrijving van item"
           },
           "DN": {
             "type": "string",
