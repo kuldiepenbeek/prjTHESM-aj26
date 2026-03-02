@@ -53,7 +53,9 @@
               "DN250",
               "DN300",
               "DN350",
-              "DN400"
+              "DN400",
+              "DN450",
+              "DN500"
             ],
             "description": "nominale leidingdiameter, bijv. DN80"
           },
