@@ -17,6 +17,10 @@
       "pattern": "^gr(?!000$)\\d{3}$",
       "description": "groepscode, bijv. gr012 (gr000 is niet toegestaan)"
     },
+    "meta_databron": {
+      "type": "string",      
+      "description": "beschrijving herkomst en voorzien gebruik van dataset, bijv. auteurnaam, scriptnaam, generatornaam..."
+    },
     "meta_timestamp": {
       "type": "string",
       "pattern": "^[0-9]{8}-[0-9]{6}$",
