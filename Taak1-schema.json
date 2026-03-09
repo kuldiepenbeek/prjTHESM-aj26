@@ -4,33 +4,44 @@
   "type": "object",
   "additionalProperties": false,
   "required": [
-    "groepID",
-    "Leidingen"
+    "meta_groep_id",
+    "leidingen"
   ],
   "properties": {
-    "groepID": {
+    "$schema": {
       "type": "string",
-      "pattern": "^groep(?!000$)\\d{3}$",
-      "description": "groepscode, bijv. groep012 (groep000 is niet toegestaan)"
+      "description": "Optional reference to schema location; ignored during validation"
     },
-    "Leidingen": {
+    "meta_groep_id": {
+      "type": "string",
+      "pattern": "^gr(?!000$)\\d{3}$",
+      "description": "groepscode, bijv. gr012 (gr000 is niet toegestaan)"
+    },
+    "meta_timestamp": {
+      "type": "string",
+      "pattern": "^[0-9]{8}-[0-9]{6}$",
+      "description": "time stamp in yyyymmdd-hhmmss voor versie-identificatie"
+    },
+    "leidingen": {
       "type": "array",
       "description": "array met elementen (key-value pairs) die elke leiding beschrijven",
       "items": {
         "type": "object",
         "additionalProperties": false,
         "required": [
-          "ID",
+          "id",
           "descr",
           "DN",
-          "L",
           "Q_d",
           "c_d",
+          "h_grad_d",
+          "L",
           "h_w_d",
+          "L_eq",
           "C_w"
         ],
         "properties": {
-          "ID": {
+          "id": {
             "type": "string",
             "minLength": 1,
             "pattern": "^(?!([Tt][Bb][Dd])$).*\\S.*$",
@@ -38,8 +49,13 @@
           },
           "descr": {
             "type": "string",
-            "description": "optionele beschrijving van item"
+            "description": "beschrijving van item (optioneel)"
           },
+          "L": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "eenheid [m], fysieke lengte van leiding"
+          },          
           "DN": {
             "type": "string",
             "enum": [
@@ -62,12 +78,7 @@
               "DN450",
               "DN500"
             ],
-            "description": "nominale leidingdiameter, bijv. DN80"
-          },
-          "L": {
-            "type": "number",
-            "exclusiveMinimum": 0,
-            "description": "eenheid [m], lengte van leiding"
+            "description": "nominale leidingdiameter code inclusief DN, bijv. DN80"
           },
           "Q_d": {
             "type": "number",
@@ -79,10 +90,20 @@
             "exclusiveMinimum": 0,
             "description": "eenheid [m/s], snelheid bij ontwerpdebiet"
           },
+          "h_grad_d": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "eenheid [m/m], hydraulische gradient door leidingsverlies bij ontwerpdebiet, verlies van een meter buislengte"
+          },
           "h_w_d": {
             "type": "number",
             "exclusiveMinimum": 0,
             "description": "eenheid [m], wrijvingsverlies bij ontwerpdebiet"
+          },
+          "L_eq": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "eenheid [m], equivalente lengte van leiding"
           },
           "C_w": {
             "type": "number",
