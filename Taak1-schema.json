@@ -35,11 +35,11 @@
         "required": [
           "id",
           "descr",
+          "L",
           "DN",
           "Q_d",
           "c_d",
-          "h_grad_d",
-          "L",
+          "h_grad_d",          
           "h_w_d",
           "L_eq",
           "C_w"
@@ -87,32 +87,32 @@
           "Q_d": {
             "type": "number",
             "exclusiveMinimum": 0,
-            "description": "eenheid [m3/h], ontwerpdebiet van leiding"
+            "description": "eenheid [m3/h]; ontwerpdebiet van leiding"
           },
           "c_d": {
             "type": "number",
             "exclusiveMinimum": 0,
-            "description": "eenheid [m/s], snelheid bij ontwerpdebiet"
+            "description": "eenheid [m/s]; snelheid bij ontwerpdebiet"
           },
           "h_grad_d": {
             "type": "number",
             "exclusiveMinimum": 0,
-            "description": "eenheid [m/m], hydraulische gradient door leidingsverlies bij ontwerpdebiet, verlies van een meter buislengte"
+            "description": "eenheid [m/m]; hydraulische gradient door leidingsverlies bij ontwerpdebiet, verlies van een meter buislengte"
           },
           "h_w_d": {
             "type": "number",
             "exclusiveMinimum": 0,
-            "description": "eenheid [m], wrijvingsverlies bij ontwerpdebiet"
+            "description": "eenheid [m]; wrijvingsverlies bij ontwerpdebiet"
           },
           "L_eq": {
             "type": "number",
             "exclusiveMinimum": 0,
-            "description": "eenheid [m], equivalente lengte van leiding"
+            "description": "eenheid [m]; equivalente lengte van leiding"
           },
           "C_w": {
             "type": "number",
             "exclusiveMinimum": 0,
-            "description": "eenheid [m], wrijvingsverliescoefficient zodat h_w = C_w * (Q*(h/m3))^2"
+            "description": "eenheid [m]; wrijvingsverliescoefficient zodat h_w = C_w * (Q*(h/m3))^2"
           }
         }
       }
