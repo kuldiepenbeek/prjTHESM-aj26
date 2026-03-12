@@ -10,7 +10,7 @@
   "properties": {
     "$schema": {
       "type": "string",
-      "description": "Optional reference to schema location; ignored during validation"
+      "description": "optionele referentie naar schema locatie"
     },
     "meta_groep_id": {
       "type": "string",
@@ -26,6 +26,10 @@
       "pattern": "^[0-9]{8}-[0-9]{6}$",
       "description": "time stamp in yyyymmdd-hhmmss voor versie-identificatie"
     },
+    "meta_opm": {
+      "type": "string",      
+      "description": "opmerkingen"
+    },
     "leidingen": {
       "type": "array",
       "description": "array met elementen (key-value pairs) die elke leiding beschrijven",
@@ -37,6 +41,7 @@
           "descr",
           "L",
           "DN",
+          "Tw",
           "Q_d",
           "c_d",
           "h_grad_d",          
@@ -83,6 +88,11 @@
               "DN500"
             ],
             "description": "nominale leidingdiameter code inclusief DN, bijv. DN80"
+          },
+          "Tw": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "eenheid [mm], wanddikte van leiding"
           },
           "Q_d": {
             "type": "number",
