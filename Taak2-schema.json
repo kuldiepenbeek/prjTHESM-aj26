@@ -50,18 +50,9 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "id",
-          "descr",
-          "L",
-          "DN",
-          "Tw",
-          "Q_d",
-          "c_d",
-          "h_grad_d",          
-          "h_w_d",
-          "L_eq",
-          "C_w"
+        "required": [ 
+          "id","descr","L","DN","Tw","Q_d","c_d",
+          "h_grad_d","h_w_d","L_eq","C_w"
         ],
         "properties": {
           "id": {
@@ -77,51 +68,50 @@
           "L": {
             "type": "number",
             "exclusiveMinimum": 0,
-            "description": "eenheid [m], fysieke lengte van leiding"
+            "description": "fysieke lengte [m] van leiding"
           },          
           "DN": {
             "type": "string",
             "enum": [
-              "DN15","DN20","DN25","DN32","DN40","DN50","DN65",
-              "DN80","DN100","DN125","DN150","DN200","DN250",
-              "DN300","DN350","DN400","DN450","DN500"
+              "DN15","DN20","DN25","DN32","DN40","DN50","DN65","DN80","DN100","DN125",
+              "DN150","DN200","DN250","DN300","DN350","DN400","DN450","DN500"
             ],
             "description": "nominale leidingdiameter code inclusief DN, bijv. DN80"
           },
           "Tw": {
             "type": "number",
             "exclusiveMinimum": 0,
-            "description": "eenheid [mm], wanddikte van leiding"
+            "description": "wanddikte [mm] van leiding"
           },
           "Q_d": {
             "type": "number",
             "exclusiveMinimum": 0,
-            "description": "eenheid [m3/h]; ontwerpdebiet van leiding"
+            "description": "ontwerpdebiet [m3/h] van leiding"
           },
           "c_d": {
             "type": "number",
             "exclusiveMinimum": 0,
-            "description": "eenheid [m/s]; snelheid bij ontwerpdebiet"
+            "description": "snelheid [m/s] bij ontwerpdebiet"
           },
           "h_grad_d": {
             "type": "number",
             "exclusiveMinimum": 0,
-            "description": "eenheid [m/m]; hydraulische gradient door leidingsverlies bij ontwerpdebiet, verlies van een meter buislengte"
+            "description": "hydraulische gradient [m/m] door leidingsverlies bij ontwerpdebiet, verlies van een meter buislengte"
           },
           "h_w_d": {
             "type": "number",
             "exclusiveMinimum": 0,
-            "description": "eenheid [m]; wrijvingsverlies bij ontwerpdebiet"
+            "description": "wrijvingsverlies [m] bij ontwerpdebiet"
           },
           "L_eq": {
             "type": "number",
             "exclusiveMinimum": 0,
-            "description": "eenheid [m]; equivalente lengte van leiding"
+            "description": "equivalente lengte [m] van leiding"
           },
           "C_w": {
             "type": "number",
             "exclusiveMinimum": 0,
-            "description": "eenheid [m/(m3/h)^2], wrijvingsverliescoëfficiënt zodat h_w = C_w * Q^2"
+            "description": "wrijvingsverliescoëfficiënt [m/(m3/h)^2] zodat h_w = C_w * Q^2"
           }
         }
       }
@@ -159,11 +149,12 @@
           "C_w": {
             "type": "number",
             "exclusiveMinimum": 0,
-            "description": "eenheid [m/(m3/h)^2], wrijvingsverliescoëfficiënt zodat h_w = C_w * Q^2"
+            "description": "wrijvingsverliescoëfficiënt [m/(m3/h)^2] zodat h_w = C_w * Q^2"
           }
         }
       }
     },
+
 
     "filters": {
       "type": "array",
@@ -183,9 +174,8 @@
           "DN": {
             "type": "string",
             "enum": [
-              "DN15","DN20","DN25","DN32","DN40","DN50","DN65",
-              "DN80","DN100","DN125","DN150","DN200","DN250",
-              "DN300","DN350","DN400","DN450","DN500"
+              "DN15","DN20","DN25","DN32","DN40","DN50","DN65","DN80","DN100","DN125",
+              "DN150","DN200","DN250","DN300","DN350","DN400","DN450","DN500"
             ],
             "description": "nominale diameter"
           },
@@ -212,11 +202,12 @@
           "C_w": {
             "type": "number",
             "exclusiveMinimum": 0,
-            "description": "eenheid [m/(m3/h)^2], wrijvingsverliescoëfficiënt zodat h_w = C_w * Q^2"
+            "description": "wrijvingsverliescoëfficiënt [m/(m3/h)^2] zodat h_w = C_w * Q^2"
           }
         }
       }
     },
+
 
     "terugslagkleppen": {
       "type": "array",
@@ -236,9 +227,8 @@
           "DN": {
             "type": "string",
             "enum": [
-              "DN15","DN20","DN25","DN32","DN40","DN50","DN65",
-              "DN80","DN100","DN125","DN150","DN200","DN250",
-              "DN300","DN350","DN400","DN450","DN500"
+              "DN15","DN20","DN25","DN32","DN40","DN50","DN65","DN80","DN100","DN125",
+              "DN150","DN200","DN250","DN300","DN350","DN400","DN450","DN500"
             ],
             "description": "nominale diameter"
           },
@@ -260,11 +250,12 @@
           "C_w": {
             "type": "number",
             "exclusiveMinimum": 0,
-            "description": "eenheid [m/(m3/h)^2], wrijvingsverliescoëfficiënt zodat h_w = C_w * Q^2"
+            "description": "wrijvingsverliescoëfficiënt [m/(m3/h)^2] zodat h_w = C_w * Q^2"
           }
         }
       }
     },
+
 
     "regelkleppen": {
       "type": "array",
@@ -284,9 +275,8 @@
           "DN": {
             "type": "string",
             "enum": [
-              "DN15","DN20","DN25","DN32","DN40","DN50","DN65",
-              "DN80","DN100","DN125","DN150","DN200","DN250",
-              "DN300","DN350","DN400","DN450","DN500"
+              "DN15","DN20","DN25","DN32","DN40","DN50","DN65","DN80","DN100","DN125",
+              "DN150","DN200","DN250","DN300","DN350","DN400","DN450","DN500"
             ],
             "description": "nominale diameter"
           },
@@ -308,6 +298,7 @@
         }
       }
     },
+
 
     "pompen": {
       "type": "array",
@@ -365,6 +356,7 @@
         }
       }
     },
+
 
     "hydraulischeBalans": {
       "type": "array",
