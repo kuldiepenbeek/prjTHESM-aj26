@@ -1,0 +1,407 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Taak2_Componenten",
+  "type": "object",
+  "additionalProperties": false,
+
+  "required": [
+    "meta_groep_id",
+    "leidingen",
+    "warmtewisselaars",
+    "filters",
+    "terugslagkleppen",
+    "regelkleppen",
+    "pompen",
+    "hydraulischeBalans"
+  ],
+
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "optionele referentie naar schema locatie"
+    },
+
+    "meta_groep_id": {
+      "type": "string",
+      "pattern": "^gr(?!000$)\\d{3}$",
+      "description": "groepscode, bijv. gr012 (gr000 is niet toegestaan)"
+    },
+
+    "meta_databron": {
+      "type": "string",
+      "description": "herkomst dataset, bv. auteur, scriptnaam, generator"
+    },
+
+    "meta_timestamp": {
+      "type": "string",
+      "pattern": "^[0-9]{8}-[0-9]{6}$",
+      "description": "timestamp in yyyymmdd-hhmmss voor versie-identificatie"
+    },
+
+    "meta_opm": {
+      "type": "string",
+      "description": "opmerkingen vrij in te vullen volgens relevantie producent"
+    },
+
+
+    "leidingen": {
+      "type": "array",
+      "description": "array met elementen (key-value pairs) die elke leiding beschrijven",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "descr",
+          "L",
+          "DN",
+          "Tw",
+          "Q_d",
+          "c_d",
+          "h_grad_d",          
+          "h_w_d",
+          "L_eq",
+          "C_w"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?!([Tt][Bb][Dd])$).*\\S.*$",
+            "description": "identificatie van leiding; mag niet leeg, niet enkel spaties en niet 'TBD'/'tbd' zijn"
+          },
+          "descr": {
+            "type": "string",
+            "description": "beschrijving van item (optioneel)"
+          },
+          "L": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "eenheid [m], fysieke lengte van leiding"
+          },          
+          "DN": {
+            "type": "string",
+            "enum": [
+              "DN15","DN20","DN25","DN32","DN40","DN50","DN65",
+              "DN80","DN100","DN125","DN150","DN200","DN250",
+              "DN300","DN350","DN400","DN450","DN500"
+            ],
+            "description": "nominale leidingdiameter code inclusief DN, bijv. DN80"
+          },
+          "Tw": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "eenheid [mm], wanddikte van leiding"
+          },
+          "Q_d": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "eenheid [m3/h]; ontwerpdebiet van leiding"
+          },
+          "c_d": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "eenheid [m/s]; snelheid bij ontwerpdebiet"
+          },
+          "h_grad_d": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "eenheid [m/m]; hydraulische gradient door leidingsverlies bij ontwerpdebiet, verlies van een meter buislengte"
+          },
+          "h_w_d": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "eenheid [m]; wrijvingsverlies bij ontwerpdebiet"
+          },
+          "L_eq": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "eenheid [m]; equivalente lengte van leiding"
+          },
+          "C_w": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "eenheid [m]; wrijvingsverliescoëfficiënt zodat h_w = C_w * (Q*(h/m3))^2"
+          }
+        }
+      }
+    },
+
+
+    "warmtewisselaars": {
+      "type": "array",
+      "description": "array met warmtewisselaars",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id","descr","Q_d","h_w_d","C_w"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?!([Tt][Bb][Dd])$).+",
+            "description": "identificatie van wisselaar"
+          },
+          "descr": {
+            "type": "string",
+            "description": "beschrijving van warmtewisselaar"
+          },
+          "Q_d": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "ontwerpdebiet [m3/h]"
+          },
+          "h_w_d": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "wrijvingsverlies [m] bij ontwerpdebiet"
+          },
+          "C_w": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "wrijvingsverliescoëfficiënt zodat h_w = C_w*(Q)^2"
+          }
+        }
+      }
+    },
+
+    "filters": {
+      "type": "array",
+      "description": "array met filters",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id","descr","DN","mesh","Kv","Q_d","h_w_d","C_w"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?!([Tt][Bb][Dd])$).+",
+            "description": "identificatie van filter"
+          },
+          "descr": { "type": "string", "description": "beschrijving" },
+          "DN": {
+            "type": "string",
+            "enum": [
+              "DN15","DN20","DN25","DN32","DN40","DN50","DN65",
+              "DN80","DN100","DN125","DN150","DN200","DN250",
+              "DN300","DN350","DN400","DN450","DN500"
+            ],
+            "description": "nominale diameter"
+          },
+          "mesh": {
+            "type": "string",
+            "enum": ["grof","fijn"],
+            "description": "filter fijnheid"
+          },
+          "Kv": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "Kv-waarde [m3/h]"
+          },
+          "Q_d": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "ontwerpdebiet [m3/h]"
+          },
+          "h_w_d": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "wrijvingsverlies [m] bij ontwerpdebiet"
+          },
+          "C_w": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "wrijvingsverliescoëfficiënt zodat h_w = C_w*(Q)^2"
+          }
+        }
+      }
+    },
+
+    "terugslagkleppen": {
+      "type": "array",
+      "description": "array met terugslagkleppen",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id","descr","DN","Kvs","Q_d","h_w_d","C_w"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?!([Tt][Bb][Dd])$).+",
+            "description": "identificatie terugslagklep"
+          },
+          "descr": { "type": "string", "description": "beschrijving" },
+          "DN": {
+            "type": "string",
+            "enum": [
+              "DN15","DN20","DN25","DN32","DN40","DN50","DN65",
+              "DN80","DN100","DN125","DN150","DN200","DN250",
+              "DN300","DN350","DN400","DN450","DN500"
+            ],
+            "description": "nominale diameter"
+          },
+          "Kvs": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "Kvs-waarde [m3/h]"
+          },
+          "Q_d": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "ontwerpdebiet [m3/h]"
+          },
+          "h_w_d": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "wrijvingsverlies [m] bij ontwerpdebiet"
+          },
+          "C_w": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "wrijvingsverliescoëfficiënt zodat h_w = C_w*(Q)^2"
+          }
+        }
+      }
+    },
+
+    "regelkleppen": {
+      "type": "array",
+      "description": "array met regelkleppen",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id","descr","DN","Kvs","Q_d","h_w_d"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?!([Tt][Bb][Dd])$).+",
+            "description": "identificatie regelklep"
+          },
+          "descr": { "type": "string", "description": "beschrijving" },
+          "DN": {
+            "type": "string",
+            "enum": [
+              "DN15","DN20","DN25","DN32","DN40","DN50","DN65",
+              "DN80","DN100","DN125","DN150","DN200","DN250",
+              "DN300","DN350","DN400","DN450","DN500"
+            ],
+            "description": "nominale diameter"
+          },
+          "Kvs": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "Kvs-waarde [m3/h]"
+          },
+          "Q_d": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "ontwerpdebiet [m3/h]"
+          },
+          "h_w_d": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "wrijvingsverlies [m] bij ontwerpdebiet"
+          }
+        }
+      }
+    },
+
+    "pompen": {
+      "type": "array",
+      "description": "array met pompen (ontwerppunt)",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id","descr","typecode","trim",
+          "N_nom","Q_d","H_d","Pas_d","eff_d"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?!([Tt][Bb][Dd])$).+",
+            "description": "identificatie pomp"
+          },
+          "descr": { "type": "string", "description": "beschrijving" },
+          "typecode": {
+            "type": "string",
+            "pattern": "^(?!([Tt][Bb][Dd])$).+",
+            "description": "pomptype, bv. KSB Etanorm 050-032-250.1"
+          },
+          "trim": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "waaierdiameter [mm]"
+          },
+          "N_nom": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "nominaal toerental [rpm]"
+          },
+          "Q_d": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "ontwerpdebiet [m3/h]"
+          },
+          "H_d": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "opvoerhoogte [m] bij ontwerpdebiet"
+          },
+          "Pas_d": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "asvermogen [kW] bij ontwerpdebiet"
+          },
+          "eff_d": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "rendement [/] bij ontwerpdebiet"
+          }
+        }
+      }
+    },
+
+    "hydraulischeBalans": {
+      "type": "array",
+      "description": "hydraulische balans voor het systeem",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "descr",
+          "h_1","h_2","h_3","h_4","h_5",
+          "h_306","h_307","h_406","h_407",
+          "Q_100A","Q_100B","Q_100C","Q_300","Q_400"
+        ],
+        "properties": {
+          "descr": {
+            "type": "string",
+            "description": "omschrijving scenario van hydraulische balans"
+          },
+
+          "h_1": { "type": "number", "description": "energiehoogte [m] positie 1" },
+          "h_2": { "type": "number", "description": "energiehoogte [m] positie 2" },
+          "h_3": { "type": "number", "description": "energiehoogte [m] positie 3" },
+          "h_4": { "type": "number", "description": "energiehoogte [m] positie 4" },
+          "h_5": { "type": "number", "description": "energiehoogte [m] positie 5" },
+
+          "h_306": { "type": "number", "description": "energiehoogte [m] positie 306" },
+          "h_307": { "type": "number", "description": "energiehoogte [m] positie 307" },
+          "h_406": { "type": "number", "description": "energiehoogte [m] positie 406" },
+          "h_407": { "type": "number", "description": "energiehoogte [m] positie 407" },
+
+          "Q_100A": { "type": "number", "description": "debiet [m3/h] tak 100A" },
+          "Q_100B": { "type": "number", "description": "debiet [m3/h] tak 100B" },
+          "Q_100C": { "type": "number", "description": "debiet [m3/h] tak 100C" },
+          "Q_300":  { "type": "number", "description": "debiet [m3/h] tak 300" },
+          "Q_400":  { "type": "number", "description": "debiet [m3/h] tak 400" }
+        }
+      }
+    }
+  }
+}
