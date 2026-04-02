@@ -121,7 +121,7 @@
           "C_w": {
             "type": "number",
             "exclusiveMinimum": 0,
-            "description": "eenheid [m]; wrijvingsverliescoëfficiënt zodat h_w = C_w * (Q*(h/m3))^2"
+            "description": "eenheid [m/(m3/h)^2], wrijvingsverliescoëfficiënt zodat h_w = C_w * Q^2"
           }
         }
       }
@@ -159,7 +159,7 @@
           "C_w": {
             "type": "number",
             "exclusiveMinimum": 0,
-            "description": "wrijvingsverliescoëfficiënt zodat h_w = C_w*(Q)^2"
+            "description": "eenheid [m/(m3/h)^2], wrijvingsverliescoëfficiënt zodat h_w = C_w * Q^2"
           }
         }
       }
@@ -212,7 +212,7 @@
           "C_w": {
             "type": "number",
             "exclusiveMinimum": 0,
-            "description": "wrijvingsverliescoëfficiënt zodat h_w = C_w*(Q)^2"
+            "description": "eenheid [m/(m3/h)^2], wrijvingsverliescoëfficiënt zodat h_w = C_w * Q^2"
           }
         }
       }
@@ -260,7 +260,7 @@
           "C_w": {
             "type": "number",
             "exclusiveMinimum": 0,
-            "description": "wrijvingsverliescoëfficiënt zodat h_w = C_w*(Q)^2"
+            "description": "eenheid [m/(m3/h)^2], wrijvingsverliescoëfficiënt zodat h_w = C_w * Q^2"
           }
         }
       }
